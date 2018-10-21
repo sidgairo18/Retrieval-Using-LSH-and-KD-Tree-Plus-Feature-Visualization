@@ -76,3 +76,11 @@ If we use both the relations, our amplified probabilities get updated to [1 - (1
                     |
 
 The given set of hash functions consider x1 and x3, x2 and x4, and x1 and x5 to be similar.
+
+---
+
+### Existing Implementations
+
+**FALCONN**: Highly optimized C++ library for LSH based similarity search (with Python bindings) by [Ilya Razenshteyn](https://ilyaraz.org). Based on [this paper](https://arxiv.org/pdf/1509.02897.pdf). From 2015/16.
+
+**[Caltech Image Search](https://code.google.com/archive/p/caltech-image-search/)**: Has implementations for KD-trees, LSH etc. originally meant for image search, in C++ and Python. Slightly older though (2011).
