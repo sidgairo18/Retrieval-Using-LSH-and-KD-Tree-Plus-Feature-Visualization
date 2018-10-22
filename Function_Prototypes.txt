@@ -1,0 +1,5 @@
+#Function to find the top k Neighbours and botton k Neighbours for an Entry
+# This takes a high dimensional vector and finds the Top k and Bottom K neighbours in the feature space.
+
+#Prototype - 
+def getTopBottomK(idx, k, flag): the value of flag can be either : 'top' or 'bottom' to get top k or bottom k respectively.
