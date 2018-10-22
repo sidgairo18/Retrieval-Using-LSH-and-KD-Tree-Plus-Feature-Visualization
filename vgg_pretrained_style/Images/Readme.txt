@@ -1,1 +1,1 @@
-Place all the Images here.
+Put the images in this directory.
