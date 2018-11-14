@@ -14,11 +14,14 @@
     * k - get number of nearest neighbours
 
 Also add here the dependencies required.
+
 #################Getting Features and Then PCA Functions################
 
 
 #################Feature Visualization##################################
+
 1. get_visualization(X, labels):
     * X - Feature vector matrix (Each row is a data point)
     * labels - is a dictionary to get labels for each data point.
+    
 #################Feature Visualization##################################
