@@ -21,8 +21,9 @@ Also add here the dependencies required.
 
 #################Feature Visualization##################################
 
-1. get_visualization(X, labels):
+1. get_visualization(X, labels, I, num):
     * X - Feature vector matrix (Each row is a data point)
     * labels - is a dictionary to get labels for each data point.
-    
+    * I - Image vector matrix (Each row is an image vector for that data point)
+    * num - Number of PCA components used to reduce data before applying tSNE.
 #################Feature Visualization##################################
