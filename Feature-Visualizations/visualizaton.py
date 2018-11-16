@@ -1,6 +1,7 @@
 from ggplot import *
 import numpy as np
 from sklearn import datasets
+from PIL import Image
 import pandas as pd
 import pickle
 from sklearn.manifold import TSNE
@@ -8,38 +9,32 @@ from sklearn.decomposition import PCA
 from bokeh.plotting import figure, show
 
 def load_data():
-    # digits = datasets.load_digits()
-    # X_test = np.zeros(shape=(digits.images.shape[0], digits.images.shape[1]*digits.images.shape[2]))
-    # for i in range(digits.images.shape[0]):
-    #     X_test[i, :] = digits.images[i, :].flatten()
-    # Y_test = digits.target
-    # print(X_test.shape, Y_test.shape)
     label_file = open('bam_2_0_image_style_labels.pkl','r')
     label_data = pickle.load(label_file)
-    Y_test = np.zeros((121000,1))
-    X_test = np.zeros((121000,1000))
-    row = 1
+    Y_test = np.zeros((100,1))
+    X_test = np.zeros((100,1000))
+    I_test = []
+    row = 0
     for image_name in label_data:
         print(row)
         Y_test[row,:] = label_data[image_name]
         X_test[row,:] = np.load('final_features2_pca/' + image_name + '.npy')
+        I_test.append(np.array(Image.open('test.png').resize((100,100), Image.BICUBIC).convert('RGBA')))
         row = row + 1
-        if row == 10000:
+        if row == 100:
             break
-    return X_test, Y_test
+    return X_test, Y_test, I_test
 
-def plot(X_test, rndperm, df):
+def plot(X_test, I_test, df):
     chart = ggplot(df, aes(x='c1', y='c2', color='label') ) \
             + geom_point(size=75,alpha=0.8) \
             + ggtitle("Result on applying pca first and tsne later")
-    print(chart)
-    # images = []
-    # for i in range(rndperm.shape[0]):
-    #     images.append(X_test[rndperm[i], :].reshape(8, 8))
-    # p = figure(x_range=(np.min(df['c1'])-30, np.max(df['c1'])+30), y_range=(np.min(df['c2'])-30,
-    #                     np.max(df['c2'])+30), plot_width=950, plot_height=950)
-    # p.image(image=images, x=df['c1'], y=df['c2'], dw=1, dh=1)
-    # show(p)
+    # print(chart)
+    p = figure(x_range=(np.min(df['c1']), np.max(df['c1'])),
+               y_range=(np.min(df['c2']), np.max(df['c2'])),
+               plot_width=950, plot_height=950)
+    p.image_rgba(image=I_test, x=df['c1'], y=df['c2'], dw=1, dh=1)
+    show(p)
 
 def apply_pca(data, pca_components):
     pca = PCA(n_components=pca_components)
@@ -51,7 +46,8 @@ def apply_tsne(data):
     tsne_result = tsne.fit_transform(data)
     return tsne_result
 
-def visualize_features(X_test, Y_test, pca_components):
+def visualize_features(X_test, Y_test, I_test, pca_components):
+    # convert matrix to PandasDataFrame
     feat_cols = [ 'pixel'+str(i) for i in range(X_test.shape[1]) ]
     df = pd.DataFrame(X_test, columns=feat_cols)
     df['label'] = Y_test
@@ -61,12 +57,15 @@ def visualize_features(X_test, Y_test, pca_components):
     pca_result = apply_pca(df[feat_cols].values, pca_components)
     tsne_result = apply_tsne(pca_result[rndperm])
     df_tsne = df.loc[rndperm,:].copy()
+    I_copy = []
+    for i in range(rndperm.shape[0]):
+        I_copy.append(I_test[rndperm[i]])
+
     df_tsne['c1'] = tsne_result[:, 0]
     df_tsne['c2'] = tsne_result[:, 1]
-    plot(X_test, rndperm, df_tsne)
+    plot(X_test, I_copy, df_tsne)
 
 if __name__== '__main__':
 
-    # convert matrix to PandasDataFrame
-    X_test, Y_test = load_data()
-    visualize_features(X_test, Y_test, 50)
+    X_test, Y_test, I_test = load_data()
+    visualize_features(X_test, Y_test, I_test, 50)
