@@ -1,5 +1,6 @@
 from ggplot import *
 import numpy as np
+import random
 from sklearn import datasets
 from PIL import Image
 import pandas as pd
@@ -11,17 +12,21 @@ from bokeh.plotting import figure, show
 def load_data():
     label_file = open('bam_2_0_image_style_labels.pkl','r')
     label_data = pickle.load(label_file)
-    Y_test = np.zeros((100,1))
-    X_test = np.zeros((100,1000))
+    label_keys = label_data.keys()
+    random.shuffle(label_keys)
+    label_data = [(key, label_data[key]) for key in label_keys]
+    Y_test = np.zeros((5000,1))
+    X_test = np.zeros((5000,1000))
     I_test = []
     row = 0
-    for image_name in label_data:
+    for image_name, label in label_data:
         print(row)
-        Y_test[row,:] = label_data[image_name]
-        X_test[row,:] = np.load('final_features2_pca/' + image_name + '.npy')
-        I_test.append(np.array(Image.open('test.png').resize((100,100), Image.BICUBIC).convert('RGBA')))
+        Y_test[row,:] = label
+        X_test[row,:] = np.load('../../final_features2_pca/' + image_name + '.npy')
+        #print('/scratch/bam_subset_2_0/' + image_name)
+        I_test.append(np.rot90(np.array(Image.open('/scratch/bam_subset_2_0/' + image_name).resize((100,100), Image.BICUBIC).convert('RGBA')), 2))
         row = row + 1
-        if row == 100:
+        if row == 5000:
             break
     return X_test, Y_test, I_test
 
