@@ -10,12 +10,12 @@ Neighbour Extraction requires 1 GPU and ~30 CPUs to run optimally
 
 2. Install pip packages listed in `Neighbour-Extraction/src/requirements.txt` using `pip3 install -r requirements.txt` inside the virtual environment
 
-3. Run `Neighbour-Extraction/src/loadModules.sh` script to load cuda module if running on ADA
+3. Run `Neighbour-Extraction/loadModules.sh` script to load cuda module if running on ADA
 
-4. Use `./Neighbour-Extraction/src/Label Dataset.ipynb` to store the dataset on scratch memory in the following format:
+4. Use `Neighbour-Extraction/src/Label Dataset.ipynb` to store the dataset on scratch memory in the following format:
 
 ```
 /scratch/bam_subset_2_0/<class_label>/<image_name>
 ```
 
-5. Run `./Neighbour-Extraction/src/getNeighbours.ipynb`
+5. Run `Neighbour-Extraction/src/getNeighbours.ipynb`
