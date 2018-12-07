@@ -1,6 +1,10 @@
 # Neighbour Extraction
 
 The dataset is stored on the scratch memory of the nodes listed in `nodes.txt`
+`/scratch/bam_subset_2_0/`
+
+The extracted features are stored at the locations mentioned in `features.txt`
+
 
 Neighbour Extraction requires 1 GPU and ~30 CPUs to run optimally 
 
