@@ -1,0 +1,1 @@
+gnode35:/scratch/bam_subset_2_0_{top/bottom}_neighbours

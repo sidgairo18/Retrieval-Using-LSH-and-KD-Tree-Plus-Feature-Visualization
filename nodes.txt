@@ -2,3 +2,5 @@ gnode03
 gnode34
 gnode10
 gnode07
+gnode42
+gnode35

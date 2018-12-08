@@ -5,6 +5,7 @@ The dataset is stored on the scratch memory of the nodes listed in `nodes.txt`
 
 The extracted features are stored at the locations mentioned in `features.txt`
 
+The extracted neighbours are stored at the locations mentioned in `neighbours.txt`
 
 Neighbour Extraction requires 1 GPU and ~30 CPUs to run optimally 
 
