@@ -24,3 +24,9 @@ Neighbour Extraction requires 1 GPU and ~30 CPUs to run optimally
 ```
 
 5. Run `Neighbour-Extraction/src/getNeighbours.ipynb`
+
+## TODO
+
+1. Diverse bottom neighbours
+    - Cluster the feature space
+    - Select farthest images from different clusters
