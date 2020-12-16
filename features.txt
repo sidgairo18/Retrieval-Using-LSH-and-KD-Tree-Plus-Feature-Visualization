@@ -1,0 +1,4 @@
+gnode35:/scratch/bam_subset_2_0_features (1-1-1-1-1)
+gnode33:/scratch/bam_subset_2_0_features_*-*-*-*-* (0-1-1-1-0 / 1-1-2-4-8 / 8-4-2-1-1)
+gnode27:/scratch/bam_subset_2_0_features (1-1-1-1-1)
+gnode27:/scratch/bam_subset_2_0_features_*-*-*-*-* (8-4-2-1-1)
